@@ -17,18 +17,10 @@ public enum Winner {
         this.price = price;
     }
 
-    public static Winner of(int matchCount, boolean matchBonus, long price) {
+    public static Winner of(int matchCount, boolean matchBonus) {
         for (Winner winner : Winner.values()) {
             if (winner.matchCount == matchCount && winner.matchBonus == matchBonus) return winner;
         }
         throw new IllegalArgumentException("[ERROR] 해당하는 당첨 등급이 없습니다.");
-    }
-
-    public long getPrice() {
-        return price;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
     }
 }

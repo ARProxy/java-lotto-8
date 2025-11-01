@@ -21,7 +21,7 @@ public class LottoController {
         return lottoService.buyLotto(amount);
     }
 
-    public LottoStaticsResponse getStatics(String winningNumber, int bonusNumber) {
-        return lottoService.staticsLotto(winningNumber, bonusNumber);
+    public LottoStaticsResponse getStatics(String winningNumber, int bonusNumber, List<LottoBuyResponse> buyLotto) {
+        return lottoService.staticsLotto(winningNumber, bonusNumber, buyLotto);
     }
 }

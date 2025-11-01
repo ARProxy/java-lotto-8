@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoService {
 
@@ -23,8 +22,10 @@ public class LottoService {
         return lottos;
     }
 
-    public LottoStaticsResponse staticsLotto(String winningNumber, int bonusNumber) {
+    public LottoStaticsResponse staticsLotto(String winningNumber, int bonusNumber, List<LottoBuyResponse> buyLotto) {
         var splitWinningNumber = splitNumbers(winningNumber);
+        var statics = Lotto.getStatistics(splitWinningNumber, bonusNumber, buyLotto);
+        System.out.println(statics);
         return null;
     }
 

@@ -19,6 +19,6 @@ public class Application {
         System.out.println("보너스 번호를 입력해 주세요.");
         int bonusNumber = Integer.parseInt(Console.readLine());
 
-        var staticsLotto = LottoController.getInstance().getStatics(winningNumber, bonusNumber);
+        var staticsLotto = LottoController.getInstance().getStatics(winningNumber, bonusNumber, buyLotto);
     }
 }
