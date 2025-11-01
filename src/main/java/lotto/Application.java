@@ -12,5 +12,11 @@ public class Application {
         var lottoController = LottoController.getInstance().buyLotto(pay);
 
         System.out.println(lottoController);
+
+        System.out.println("당첨 번호를 입력해 주세요.");
+        String winningNumber = Console.readLine();
+
+        System.out.println("보너스 번호를 입력해 주세요.");
+        int bonusNumber = Integer.parseInt(Console.readLine());
     }
 }
