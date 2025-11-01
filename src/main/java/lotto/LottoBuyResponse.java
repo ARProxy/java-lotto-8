@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-public record LottoDto(
+public record LottoBuyResponse(
         List<Integer> lotto
 ) {
 }

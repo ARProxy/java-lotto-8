@@ -17,7 +17,11 @@ public class LottoController {
         return instance;
     }
 
-    public List<LottoDto> buyLotto(int amount) {
+    public List<LottoBuyResponse> buyLotto(int amount) {
         return lottoService.buyLotto(amount);
+    }
+
+    public LottoStaticsResponse getStatics(String winningNumber, int bonusNumber) {
+        return lottoService.staticsLotto(winningNumber, bonusNumber);
     }
 }
