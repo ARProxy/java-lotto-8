@@ -23,4 +23,12 @@ public enum Winner {
         }
         throw new IllegalArgumentException("[ERROR] 해당하는 당첨 등급이 없습니다.");
     }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
 }
