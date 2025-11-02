@@ -26,24 +26,28 @@ public class LottoService {
         return rateOfReturn(statics, buyLotto.size());
     }
 
-    private LottoStaticsResponse rateOfReturn(Map<Winner, Long> statics, int size) {
-        long sum = 0L;
-        int[] temp = new int[5];
-        int index = 0;
-        for (Winner winner : statics.keySet()) {
-            long count = statics.get(winner);
-            sum += winner.getPrice() * count;
-            temp[index++] = (int) count;
-        }
-        double rate = (double) sum / (size * 1000) * 100;
+    private LottoStaticsResponse rateOfReturn(Map<Winner, Long> statistics, int purchaseCount) {
+        long totalPrize = calculateTotalPrize(statistics);
+        double profitRate = calculateProfitRate(totalPrize, purchaseCount);
 
         return new LottoStaticsResponse(
-                temp[0],
-                temp[1],
-                temp[2],
-                temp[3],
-                temp[4],
-                rate
+                statistics.getOrDefault(Winner.FIRST, 0L),
+                statistics.getOrDefault(Winner.SECOND, 0L),
+                statistics.getOrDefault(Winner.THIRD, 0L),
+                statistics.getOrDefault(Winner.FOURTH, 0L),
+                statistics.getOrDefault(Winner.FIFTH, 0L),
+                profitRate
         );
+    }
+
+    private long calculateTotalPrize(Map<Winner, Long> statistics) {
+        return statistics.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
+
+    private double calculateProfitRate(long totalPrize, int purchaseCount) {
+        long totalCost = (long) purchaseCount * 1000;
+        return (double) totalPrize / totalCost * 100;
     }
 }

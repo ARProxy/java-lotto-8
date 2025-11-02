@@ -7,5 +7,4 @@ public record LottoStaticsResponse(
         long fourth,
         long fifth,
         double rateOfReturn
-) {
-}
+) { }

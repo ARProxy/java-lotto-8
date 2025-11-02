@@ -1,16 +1,13 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputValidator {
     private static final int LOTTO_PRICE = 1000;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
 
     public static int validatePurchaseAmount(String input) {
         int amount = parseInteger(input, "[ERROR] 구입 금액은 숫자여야 합니다.");
@@ -21,9 +18,7 @@ public class InputValidator {
 
     public static List<Integer> validateWinningNumbers(String input) {
         List<Integer> numbers = parseNumbers(input);
-        validateNumberCount(numbers);
-        validateNumberRange(numbers);
-        validateNoDuplicates(numbers);
+        new Lotto(numbers);
         return numbers;
     }
 
@@ -62,27 +57,6 @@ public class InputValidator {
     private static void validateThousandUnit(int amount) {
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
-        }
-    }
-
-    private static void validateNumberCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
-        }
-    }
-
-    private static void validateNumberRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-                throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-            }
-        }
-    }
-
-    private static void validateNoDuplicates(List<Integer> numbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호에 중복된 숫자가 있습니다.");
         }
     }
 
