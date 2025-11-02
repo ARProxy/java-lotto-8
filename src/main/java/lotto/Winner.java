@@ -27,8 +27,4 @@ public enum Winner {
     public long getPrice() {
         return price;
     }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
 }

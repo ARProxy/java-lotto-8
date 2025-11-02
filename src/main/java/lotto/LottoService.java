@@ -2,10 +2,8 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -23,17 +21,9 @@ public class LottoService {
         return lottos;
     }
 
-    public LottoStaticsResponse staticsLotto(String winningNumber, int bonusNumber, List<LottoBuyResponse> buyLotto) {
-        var splitWinningNumber = splitNumbers(winningNumber);
-        var statics = Lotto.getStatistics(splitWinningNumber, bonusNumber, buyLotto);
+    public LottoStaticsResponse staticsLotto(List<Integer> winningNumbers, int bonusNumber, List<LottoBuyResponse> buyLotto) {
+        var statics = Lotto.getStatistics(winningNumbers, bonusNumber, buyLotto);
         return rateOfReturn(statics, buyLotto.size());
-    }
-
-    private List<Integer> splitNumbers(String winningNumber) {
-        return Arrays.stream(winningNumber.split(","))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     private LottoStaticsResponse rateOfReturn(Map<Winner, Long> statics, int size) {
@@ -45,7 +35,7 @@ public class LottoService {
             sum += winner.getPrice() * count;
             temp[index++] = (int) count;
         }
-        double rate = (double) sum / size * 10;
+        double rate = (double) sum / (size * 1000) * 100;
 
         return new LottoStaticsResponse(
                 temp[0],
